@@ -34,8 +34,10 @@ export const usePageData = defineStore({
       localStorage.setItem('pagedata', JSON.stringify(this.pagedata));
     },
     add(id, selectedItem) {
-      if (this.pagedata[id]) this.pagedata[id].push(selectedItem);
-      else this.pagedata[id] = [selectedItem];
+      const key = { key: Math.random().toString().split('.')[1] };
+      const newItem = { ...selectedItem, ...key };
+      if (this.pagedata[id]) this.pagedata[id].push(newItem);
+      else this.pagedata[id] = [newItem];
     },
     remove(id, item) {
       if (this.pagedata[id])

@@ -2,21 +2,21 @@
   <div>
     <div v-for="comp in getPageData" :key="comp">
       <Header
-        v-if="comp.key === 'header'"
+        v-if="comp.title === 'Header'"
         :isEditing="isEditing"
         :title="comp.title"
         @updateTitle="comp.title = $event"
         @delete-item="deletePageData(comp)"
       />
       <TextBox
-        v-if="comp.key === 'text'"
+        v-if="comp.title === 'Text Box'"
         :isEditing="isEditing"
         :text="comp.text"
         @updateText="comp.text = $event"
         @delete-item="deletePageData(comp)"
       />
       <QuoteBox
-        v-if="comp.key === 'quote'"
+        v-if="comp.title === 'Quote Box'"
         :isEditing="isEditing"
         :quote="comp.quote"
         :quotee="comp.quotee"
