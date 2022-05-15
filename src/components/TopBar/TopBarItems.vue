@@ -1,5 +1,5 @@
 <template>
-  <div style="display: contents;">
+  <div style="display: contents">
     <button
       class="navbar-toggler"
       type="button"
@@ -18,7 +18,9 @@
           :key="item.path"
           class="nav-item text-center"
         >
+          <top-bar-pages v-if="item.name === 'pages'" />
           <router-link
+            v-else
             class="nav-link"
             :to="item.path"
             :class="{ active: $route.path === item.path }"
@@ -26,7 +28,6 @@
             {{ item.name }}
           </router-link>
         </li>
-        <top-bar-pages />
       </ul>
     </div>
   </div>
@@ -43,6 +44,7 @@ export default {
       menuItems: [
         { name: 'Home', path: '/' },
         { name: 'Contact', path: '/contact' },
+        { name: 'Pages', name: 'pages' },
         { name: 'Add Page', path: '/add' },
       ],
     };

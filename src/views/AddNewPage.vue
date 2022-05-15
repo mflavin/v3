@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="display-6 py-4">Add New Page</h1>
-    <div class="input-group mt-3">
+    <div class="input-group my-5">
       <input
         v-model="pagename"
         type="text"
@@ -18,7 +18,7 @@
           class="btn"
           type="button"
         >
-          Button
+          Add
         </button>
       </div>
     </div>

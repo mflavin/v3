@@ -1,8 +1,7 @@
 <template>
   <div
-    class="d-flex"
+    class="d-flex mt-4"
     :class="isEditing ? 'justify-content-between' : 'justify-content-end'"
-    style="margin-top: -30px"
     :style="isEditing ? 'margin-bottom: 100px' : ''"
   >
     <delete-modal
