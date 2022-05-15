@@ -5,60 +5,11 @@
     style="margin-top: -30px"
     :style="isEditing ? 'margin-bottom: 100px' : ''"
   >
-    <!-- Delete Button trigger modal -->
-    <button
-      v-if="isEditing"
-      type="button"
-      class="btn btn-danger mx-2"
-      data-bs-toggle="modal"
-      data-bs-target="#deleteModal"
-    >
-      <icon-trash />
-    </button>
-
-    <!-- Delete Modal -->
-    <div
-      v-if="isEditing"
-      class="modal fade"
-      id="deleteModal"
-      tabindex="-1"
-      aria-labelledby="deleteModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Delete This Page</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to delete this page?
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              @click="deletePage()"
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <delete-modal
+      :item="{ title: 'page', key: 'deletePage' }"
+      :isEditing="isEditing"
+      @delete-modal-clicked="deletePage()"
+    />
 
     <!-- Button trigger modal -->
     <button
@@ -153,10 +104,11 @@ import IconCancel from '@/components/icons/IconCancel.vue';
 import IconPencil from '@/components/icons/IconPencil.vue';
 import IconSave from '@/components/icons/IconSave.vue';
 import IconTrash from '@/components/icons/IconTrash.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
 
 export default {
   name: 'form-modal',
-  components: { IconCancel, IconPencil, IconSave, IconTrash },
+  components: { IconCancel, IconPencil, IconSave, IconTrash, DeleteModal },
   data() {
     return {
       selectedItem: '',

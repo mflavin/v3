@@ -1,36 +1,33 @@
 <template>
   <div v-if="isEditing" class="mb-3">
-    <button
-      @click="$emit('delete-item')"
-      type="button"
-      class="btn btn-danger btn-sm float-end"
-    >
-      <icon-trash />
-    </button>
+    <delete-modal
+      :item="item"
+      :isEditing="isEditing"
+      @delete-modal-clicked="$emit('delete-item')"
+    />
     <label class="form-label w-100">
       Text Box
       <textarea
-        v-model="text"
-        @input="$emit('updateText', text)"
+        v-model="item.text"
+        @input="$emit('updateText', item.text)"
         class="form-control"
         rows="3"
       ></textarea>
     </label>
   </div>
-  <p v-else class="lead">{{ text || 'Default Text' }}</p>
+  <p v-else class="lead">{{ item.text || 'Default Text' }}</p>
 </template>
 
 <script>
-import IconPencil from '@/components/icons/IconPencil.vue';
-import IconTrash from '@/components/icons/IconTrash.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
 
 export default {
   name: 'text-box',
-  components: { IconPencil, IconTrash },
+  components: { DeleteModal },
   props: {
-    text: {
-      type: String,
-      default: 'Default Text',
+    item: {
+      type: Object,
+      required: true,
     },
     isEditing: {
       type: Boolean,

@@ -44,6 +44,7 @@ export default {
           page.add(this.pagename, selection);
         }
         this.$router.push(`/view/${this.pagename}`);
+        page.save();
       }
     },
   },

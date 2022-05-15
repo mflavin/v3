@@ -1,28 +1,27 @@
 <template>
   <div>
-    <div v-for="comp in getPageData" :key="comp">
+    <div v-for="item in getPageData" :key="item.key">
       <Header
-        v-if="comp.title === 'Header'"
+        v-if="item.title === 'Header'"
         :isEditing="isEditing"
-        :text="comp.text"
-        @updateText="comp.text = $event"
-        @delete-item="deletePageData(comp)"
+        :item="item"
+        @updateText="item.text = $event"
+        @delete-item="deletePageData(item)"
       />
       <TextBox
-        v-if="comp.title === 'Text Box'"
+        v-if="item.title === 'Text Box'"
         :isEditing="isEditing"
-        :text="comp.text"
-        @updateText="comp.text = $event"
-        @delete-item="deletePageData(comp)"
+        :item="item"
+        @updateText="item.text = $event"
+        @delete-item="deletePageData(item)"
       />
       <QuoteBox
-        v-if="comp.title === 'Quote Box'"
+        v-if="item.title === 'Quote Box'"
         :isEditing="isEditing"
-        :quote="comp.quote"
-        :quotee="comp.quotee"
-        @updateQuote="comp.quote = $event"
-        @updateQuotee="comp.quotee = $event"
-        @delete-item="deletePageData(comp)"
+        :item="item"
+        @updateQuote="item.quote = $event"
+        @updateQuotee="item.quotee = $event"
+        @delete-item="deletePageData(item)"
       />
     </div>
   </div>
