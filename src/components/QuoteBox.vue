@@ -5,25 +5,33 @@
       type="button"
       class="btn btn-danger btn-sm float-end mb-1"
     >
-      <IconTrash />
+      <icon-trash />
     </button>
     <label class="form-label w-100 px-4">
       Quote
-      <textarea v-model="quote" class="form-control"></textarea>
+      <textarea
+        v-model="quote"
+        @input="$emit('updateQuote', quote)"
+        class="form-control"
+      ></textarea>
     </label>
     <label class="form-label w-100 p-4">
       quotee
-      <textarea v-model="quotee" class="form-control"></textarea>
+      <textarea
+        v-model="quotee"
+        @input="$emit('updateQuotee', quotee)"
+        class="form-control"
+      ></textarea>
     </label>
   </figure>
   <figure v-else>
     <blockquote class="blockquote p-4">
       <p>
-        {{ quote }}
+        {{ quote || 'Default quote' }}
       </p>
     </blockquote>
     <figcaption class="blockquote-footer px-4 pb-4">
-      {{ quotee }}
+      {{ quotee || 'Default quotee' }}
     </figcaption>
   </figure>
 </template>

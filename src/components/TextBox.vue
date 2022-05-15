@@ -4,17 +4,21 @@
       @click="$emit('delete-item')"
       type="button"
       class="btn btn-danger btn-sm float-end"
-      style="margin-bottom: -16px;"
+      style="margin-bottom: -16px"
     >
-      <IconTrash />
+      <icon-trash />
     </button>
     <label class="form-label w-100">
       Text Box
-      <textarea v-model="text" class="form-control" rows="3"></textarea>
+      <textarea
+        v-model="text"
+        @input="$emit('updateText', text)"
+        class="form-control"
+        rows="3"
+      ></textarea>
     </label>
-
   </div>
-  <p v-else class="lead">{{ text }}</p>
+  <p v-else class="lead">{{ text || 'Default Text' }}</p>
 </template>
 
 <script>

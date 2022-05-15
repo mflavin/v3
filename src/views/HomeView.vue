@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="display-6 pt-4">ATOM’S VIRTUAL HOME PORT</h1>
+    <h1 class="display-6 py-4">ATOM’S VIRTUAL HOME PORT</h1>
     <p class="lead">
       Atom’s Virtual Homeport contains stories and scenes from over 20 years and
       two voyages around the world seeking adventure aboard our 28-foot Pearson

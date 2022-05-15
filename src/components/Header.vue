@@ -4,16 +4,21 @@
       @click="$emit('delete-item')"
       type="button"
       class="btn btn-danger btn-sm float-end"
-      style="margin-bottom: -16px;"
+      style="margin-bottom: -16px"
     >
-      <IconTrash />
+      <icon-trash />
     </button>
     <label class="form-label w-100">
       Header
-      <input v-model="title" type="text" class="form-control form-control-lg" />
+      <input
+        v-model="title"
+        @input="$emit('updateTitle', title)"
+        type="text"
+        class="form-control form-control-lg"
+      />
     </label>
   </div>
-  <h1 v-else class="display-6 pt-4">{{ title }}</h1>
+  <h1 v-else class="display-6 py-4">{{ title || 'Default Header' }}</h1>
 </template>
 
 <script>

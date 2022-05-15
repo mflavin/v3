@@ -1,7 +1,7 @@
 <template>
   <div>
     <top-bar />
-    <div class="container-sm">
+    <div class="container-sm mt-5">
       <router-view />
     </div>
   </div>
@@ -22,5 +22,8 @@ body {
 }
 .headerBackground {
   background: #2c3e50;
+}
+.lead {
+  margin: 24px 0px;
 }
 </style>

@@ -5,12 +5,14 @@
         v-if="comp.key === 'header'"
         :isEditing="isEditing"
         :title="comp.title"
+        @updateTitle="comp.title = $event"
         @delete-item="deletePageData(comp)"
       />
       <TextBox
         v-if="comp.key === 'text'"
         :isEditing="isEditing"
         :text="comp.text"
+        @updateText="comp.text = $event"
         @delete-item="deletePageData(comp)"
       />
       <QuoteBox
@@ -18,6 +20,8 @@
         :isEditing="isEditing"
         :quote="comp.quote"
         :quotee="comp.quotee"
+        @updateQuote="comp.quote = $event"
+        @updateQuotee="comp.quotee = $event"
         @delete-item="deletePageData(comp)"
       />
     </div>

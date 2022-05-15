@@ -9,7 +9,7 @@
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      Articles
+      Pages
     </a>
     <ul
       class="dropdown-menu dropdown-menu-dark"

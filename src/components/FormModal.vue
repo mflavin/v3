@@ -1,30 +1,92 @@
 <template>
-  <div>
-    <div class="row text-center m-4">
-      <div class="col">
-        <!-- Button trigger modal -->
-        <button
-          :disabled="!$route.params.id"
-          :class="$route.params.id ? 'btn-primary' : 'btn-outline-secondary'"
-          type="button"
-          class="btn"
-          data-bs-toggle="modal"
-          data-bs-target="#FormComponentModal"
-        >
-          Add Section
-        </button>
-      </div>
-      <div class="col">
-        <button @click="save()" type="button" class="btn btn-success mx-4">
-          Save Page
-        </button>
-        <button @click="deletePage()" type="button" class="btn btn-danger mx-4">
-          Delete This Page
-        </button>
+  <div
+    class="d-flex"
+    :class="isEditing ? 'justify-content-between' : 'justify-content-end'"
+    style="margin-top: -30px"
+    :style="isEditing ? 'margin-bottom: 100px' : ''"
+  >
+    <!-- Delete Button trigger modal -->
+    <button
+      v-if="isEditing"
+      type="button"
+      class="btn btn-danger mx-2"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal"
+    >
+      <icon-trash />
+    </button>
+
+    <!-- Delete Modal -->
+    <div
+      v-if="isEditing"
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete This Page</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this page?
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              @click="deletePage()"
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Button trigger modal -->
+    <button
+      v-if="isEditing"
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#FormComponentModal"
+    >
+      Add Section
+    </button>
+
+    <button
+      v-if="isEditing"
+      @click="
+        savePage();
+        viewPage();
+      "
+      type="button"
+      class="btn btn-secondary"
+    >
+      <icon-cancel />
+    </button>
+    <button v-else @click="editPage()" type="button" class="btn btn-success">
+      <icon-pencil />
+    </button>
+
+    <!-- Add Section Modal -->
     <div
       class="modal fade"
       id="FormComponentModal"
@@ -75,7 +137,6 @@
               :class="selectedItem ? 'btn-primary' : 'btn-outline-secondary'"
               type="button"
               class="btn"
-              data-bs-toggle="modal"
             >
               Add Section
             </button>
@@ -88,22 +149,42 @@
 
 <script>
 import { usePageData } from '@/stores/pagedata';
+import IconCancel from '@/components/icons/IconCancel.vue';
+import IconPencil from '@/components/icons/IconPencil.vue';
+import IconSave from '@/components/icons/IconSave.vue';
+import IconTrash from '@/components/icons/IconTrash.vue';
+
 export default {
   name: 'form-modal',
+  components: { IconCancel, IconPencil, IconSave, IconTrash },
   data() {
     return {
       selectedItem: '',
       sectionOptions: [
-        { title: 'Header', key: 'header' },
-        { title: 'Text Box', key: 'text' },
-        { title: 'Quote Box', key: 'quote' },
+        { title: 'Header', text: '', key: 'header' },
+        { title: 'Text Box', text: '', key: 'text' },
+        { title: 'Quote Box', quote: '', quotee: '', key: 'quote' },
       ],
     };
   },
+  computed: {
+    isEditing() {
+      const { name } = this.$route;
+      return name === 'editpage';
+    },
+  },
   methods: {
-    save() {
+    savePage() {
       const page = usePageData();
       page.save();
+    },
+    viewPage() {
+      const { id } = this.$route.params;
+      this.$router.push(`/view/${id}`);
+    },
+    editPage() {
+      const { id } = this.$route.params;
+      this.$router.push(`/edit/${id}`);
     },
     deletePage() {
       const { id } = this.$route.params;

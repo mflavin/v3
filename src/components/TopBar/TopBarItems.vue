@@ -43,7 +43,7 @@ export default {
       menuItems: [
         { name: 'Home', path: '/' },
         { name: 'Contact', path: '/contact' },
-        { name: 'Add Article', path: '/add' },
+        { name: 'Add Page', path: '/add' },
       ],
     };
   },
