@@ -39,7 +39,10 @@ export default {
     addPageData() {
       if (this.pagename) {
         const page = usePageData();
-        page.add(this.pagename, {});
+        for (let i = 0; i < page.sectionOptions.length; i++) {
+          const selection = page.sectionOptions[i];
+          page.add(this.pagename, selection);
+        }
         this.$router.push(`/view/${this.pagename}`);
       }
     },

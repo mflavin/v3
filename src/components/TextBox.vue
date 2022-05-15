@@ -4,7 +4,6 @@
       @click="$emit('delete-item')"
       type="button"
       class="btn btn-danger btn-sm float-end"
-      style="margin-bottom: -16px"
     >
       <icon-trash />
     </button>

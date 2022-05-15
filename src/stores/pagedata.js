@@ -1,12 +1,24 @@
 import { defineStore } from 'pinia';
 import { useRoute } from 'vue-router';
 
+const getData = () => {
+  const data = localStorage.getItem('pagedata');
+  if (data) {
+    const parseData = JSON.parse(data);
+    if (parseData && Object.keys(parseData).length) return parseData;
+  }
+  return false;
+};
+
 export const usePageData = defineStore({
   id: 'pagedata',
   state: () => ({
-    pagedata: localStorage.getItem('pagedata')
-      ? JSON.parse(localStorage.getItem('pagedata'))
-      : {},
+    sectionOptions: [
+      { title: 'Header', text: '' },
+      { title: 'Text Box', text: '' },
+      { title: 'Quote Box', quote: '', quotee: '' },
+    ],
+    pagedata: getData() ? getData() : {},
   }),
   getters: {
     getPages: state => {
@@ -21,7 +33,7 @@ export const usePageData = defineStore({
     currentpage: state => {
       const route = useRoute();
       const { id } = route.params;
-      if (id) return state.pagedata[id];
+      if (id && state.pagedata[id]) return state.pagedata[id];
       return {};
     },
   },
@@ -34,13 +46,15 @@ export const usePageData = defineStore({
       localStorage.setItem('pagedata', JSON.stringify(this.pagedata));
     },
     add(id, selectedItem) {
-      const key = { key: Math.random().toString().split('.')[1] };
-      const newItem = { ...selectedItem, ...key };
-      if (this.pagedata[id]) this.pagedata[id].push(newItem);
-      else this.pagedata[id] = [newItem];
+      if (selectedItem && Object.keys(selectedItem).length) {
+        const key = { key: Math.random().toString().split('.')[1] };
+        const newItem = { ...selectedItem, ...key };
+        if (this.pagedata[id]) this.pagedata[id].push(newItem);
+        else this.pagedata[id] = [newItem];
+      }
     },
     remove(id, item) {
-      if (this.pagedata[id])
+      if (id && item && Object.keys(item).length && this.pagedata[id])
         this.pagedata[id] = this.pagedata[id].filter(x => x !== item);
     },
   },

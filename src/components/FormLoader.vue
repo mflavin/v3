@@ -4,8 +4,8 @@
       <Header
         v-if="comp.title === 'Header'"
         :isEditing="isEditing"
-        :title="comp.title"
-        @updateTitle="comp.title = $event"
+        :text="comp.text"
+        @updateText="comp.text = $event"
         @delete-item="deletePageData(comp)"
       />
       <TextBox

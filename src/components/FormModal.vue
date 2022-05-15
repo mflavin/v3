@@ -161,13 +161,17 @@ export default {
     return {
       selectedItem: '',
       sectionOptions: [
-        { title: 'Header', text: '', key: 'header' },
-        { title: 'Text Box', text: '', key: 'text' },
-        { title: 'Quote Box', quote: '', quotee: '', key: 'quote' },
+        { title: 'Header', text: '' },
+        { title: 'Text Box', text: '' },
+        { title: 'Quote Box', quote: '', quotee: '' },
       ],
     };
   },
   computed: {
+    sectionOptions() {
+      const page = usePageData();
+      return page.sectionOptions;
+    },
     isEditing() {
       const { name } = this.$route;
       return name === 'editpage';
