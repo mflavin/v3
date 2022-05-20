@@ -4,7 +4,7 @@
     <button
       v-if="isEditing"
       type="button"
-      class="btn btn-danger mx-2"
+      class="btn btn-danger"
       :class="{ 'float-end': item && item.title !== 'page' }"
       data-bs-toggle="modal"
       :data-bs-target="`#deleteModal${item.key}`"

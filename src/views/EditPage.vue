@@ -1,16 +1,16 @@
 <template>
   <div>
-    <form-modal />
-    <form-loader />
+    <page-actions />
+    <page-renderer />
   </div>
 </template>
 
 <script>
-import FormLoader from '@/components/FormLoader.vue';
-import FormModal from '@/components/FormModal.vue';
+import PageRenderer from '@/components/PageRenderer.vue';
+import PageActions from '@/components/PageActions.vue';
 
 export default {
-  name: 'add-new-page',
-  components: { FormLoader, FormModal },
+  name: 'edit-page',
+  components: { PageRenderer, PageActions },
 };
 </script>
