@@ -9,7 +9,7 @@
           height="100"
           width="100"
         />
-        <span style="margin-left: 24px">Big Poppa's Boat</span>
+        <span class="ms-4">Big Poppa's Boat</span>
       </div>
       <top-bar-items />
     </div>
