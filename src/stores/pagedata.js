@@ -14,9 +14,7 @@ export const usePageData = defineStore({
   id: 'pagedata',
   state: () => ({
     sectionOptions: [
-      { title: 'Header', text: '' },
-      { title: 'Text Box', text: '' },
-      { title: 'Quote Box', quote: '', quotee: '' },
+      { text: '', style: { 'font-size': '18px' } },
     ],
     pagedata: getData() ? getData() : {},
   }),
@@ -45,13 +43,12 @@ export const usePageData = defineStore({
       delete this.pagedata[id];
       localStorage.setItem('pagedata', JSON.stringify(this.pagedata));
     },
-    add(id, selectedItem) {
-      if (selectedItem && Object.keys(selectedItem).length) {
-        const key = { key: Math.random().toString().split('.')[1] };
-        const newItem = { ...selectedItem, ...key };
-        if (this.pagedata[id]) this.pagedata[id].push(newItem);
-        else this.pagedata[id] = [newItem];
-      }
+    add(id) {
+      const selectedItem = this.sectionOptions[0];
+      const key = { key: Math.random().toString().split('.')[1] };
+      const newItem = { ...selectedItem, ...key };
+      if (this.pagedata[id]) this.pagedata[id].push(newItem);
+      else this.pagedata[id] = [newItem];
     },
     remove(id, item) {
       if (id && item && Object.keys(item).length && this.pagedata[id])
